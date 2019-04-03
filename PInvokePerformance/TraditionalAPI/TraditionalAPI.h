@@ -24,6 +24,6 @@ TRADITIONALAPI_API double __stdcall TA_CalculateSquareRoot(double dValue);
 TRADITIONALAPI_API double __stdcall TA_DotProduct(double arThreeTuple1[], double arThreeTuple2[]);
 
 //	Run each test x times.
-TRADITIONALAPI_API void __stdcall TA_Test1(unsigned __int64 nTestCount);
-TRADITIONALAPI_API void __stdcall TA_Test2(unsigned __int64 nTestCount);
-TRADITIONALAPI_API void __stdcall TA_Test3(unsigned __int64 nTestCount);
+TRADITIONALAPI_API unsigned int __stdcall TA_Test1(double nTestCount);
+TRADITIONALAPI_API double __stdcall TA_Test2(double nTestCount);
+TRADITIONALAPI_API double __stdcall TA_Test3(double nTestCount);
