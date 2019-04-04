@@ -23,12 +23,6 @@ namespace pInvokePerformanceCore
         {
             //  Set the view model properties.
             PerformanceTestCore test = e.Result as PerformanceTestCore;
-            Unmanaged_Test1_Result = test.Unmanaged_Test1_Time;
-            Unmanaged_Test2_Result = test.Unmanaged_Test2_Time;
-            Unmanaged_Test3_Result = test.Unmanaged_Test3_Time;
-            ManagedInteface_Test1_Result = test.ManagedInterface_Test1_Time;
-            ManagedInteface_Test2_Result = test.ManagedInterface_Test2_Time;
-            ManagedInteface_Test3_Result = test.ManagedInterface_Test3_Time;
             PInvoke_Test1_Result = test.PInvoke_Test1_Time;
             PInvoke_Test2_Result = test.PInvoke_Test2_Time;
             PInvoke_Test3_Result = test.PInvoke_Test3_Time;
@@ -71,61 +65,6 @@ namespace pInvokePerformanceCore
             set { SetValue(IterationsProperty, value); }
         }
 
-
-        private NotifyingProperty Unmanaged_Test1_ResultProperty =
-          new NotifyingProperty("Unmanaged_Test1_Result", typeof(double), default(double));
-
-        public double Unmanaged_Test1_Result
-        {
-            get { return (double)GetValue(Unmanaged_Test1_ResultProperty); }
-            set { SetValue(Unmanaged_Test1_ResultProperty, value); }
-        }
-
-        private NotifyingProperty Unmanaged_Test2_ResultProperty =
-          new NotifyingProperty("Unmanaged_Test2_Result", typeof(double), default(double));
-
-        public double Unmanaged_Test2_Result
-        {
-            get { return (double)GetValue(Unmanaged_Test2_ResultProperty); }
-            set { SetValue(Unmanaged_Test2_ResultProperty, value); }
-        }
-
-        private NotifyingProperty Unmanaged_Test3_ResultProperty =
-          new NotifyingProperty("Unmanaged_Test3_Result", typeof(double), default(double));
-
-        public double Unmanaged_Test3_Result
-        {
-            get { return (double)GetValue(Unmanaged_Test3_ResultProperty); }
-            set { SetValue(Unmanaged_Test3_ResultProperty, value); }
-        }
-
-        private NotifyingProperty ManagedInteface_Test1_ResultProperty =
-          new NotifyingProperty("ManagedInteface_Test1_Result", typeof(double), default(double));
-
-        public double ManagedInteface_Test1_Result
-        {
-            get { return (double)GetValue(ManagedInteface_Test1_ResultProperty); }
-            set { SetValue(ManagedInteface_Test1_ResultProperty, value); }
-        }
-
-        private NotifyingProperty ManagedInteface_Test2_ResultProperty =
-          new NotifyingProperty("ManagedInteface_Test2_Result", typeof(double), default(double));
-
-        public double ManagedInteface_Test2_Result
-        {
-            get { return (double)GetValue(ManagedInteface_Test2_ResultProperty); }
-            set { SetValue(ManagedInteface_Test2_ResultProperty, value); }
-        }
-
-        private NotifyingProperty ManagedInteface_Test3_ResultProperty =
-          new NotifyingProperty("ManagedInteface_Test3_Result", typeof(double), default(double));
-
-        public double ManagedInteface_Test3_Result
-        {
-            get { return (double)GetValue(ManagedInteface_Test3_ResultProperty); }
-            set { SetValue(ManagedInteface_Test3_ResultProperty, value); }
-        }
-
         private NotifyingProperty PInvoke_Test1_ResultProperty =
           new NotifyingProperty("PInvoke_Test1_Result", typeof(double), default(double));
 
@@ -152,7 +91,6 @@ namespace pInvokePerformanceCore
             get { return (double)GetValue(PInvoke_Test3_ResultProperty); }
             set { SetValue(PInvoke_Test3_ResultProperty, value); }
         }
-
 
 
         private ViewModelCommand runTestsCommand;

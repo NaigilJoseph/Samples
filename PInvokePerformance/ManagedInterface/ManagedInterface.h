@@ -5,6 +5,8 @@
 #include "..\TraditionalAPI\TraditionalAPI.h"
 
 using namespace System;
+using namespace System::Runtime::InteropServices;
+using namespace SharedData;
 
 namespace ManagedInterface {
 
@@ -32,6 +34,23 @@ namespace ManagedInterface {
 			
 			//	Call the unmanaged function.
 			return TA_DotProduct(p1, p2);
+		}
+
+		System::String^ TestStructInStruct(MyPerson2^ pPerson2)
+		{
+			// Allocate a buffer for serialization, pointer to NULL otherwise
+			IntPtr ptr = Marshal::AllocCoTaskMem(Marshal::SizeOf(pPerson2));
+
+			// Serialize the managed object to "static" memory (not managed by the GC)
+			Marshal::StructureToPtr(pPerson2, ptr, false);
+
+			//	Call the unmanaged function.
+			char* pString =  TestStructInStructAPI(reinterpret_cast<MYPERSON2*>(ptr.ToPointer()));
+			String^ stringValue = gcnew String(pString);
+			DeleteStringAPI(pString);
+
+			Marshal::FreeCoTaskMem(ptr);
+			return stringValue;
 		}
 	};
 }

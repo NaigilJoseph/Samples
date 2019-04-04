@@ -126,6 +126,10 @@
       <Project>{67143223-9C7F-42F9-B988-48A52FB70E5C}</Project>
       <Name>ManagedInterface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SharedData\SharedData.csproj">
+      <Project>{35fbab6d-b8c3-4fba-ad6b-d61424ad1a1c}</Project>
+      <Name>SharedData</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

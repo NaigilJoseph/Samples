@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 #include "TraditionalAPI.h"
-#include "..\TraditionalAPIStatic\TraditionalAPIStatic.h"
+
 #include <math.h>
 #include <tchar.h>
 
@@ -42,4 +42,16 @@ TRADITIONALAPI_API double __cdecl TA_Test2(double nTestCount)
 TRADITIONALAPI_API double __cdecl TA_Test3(double nTestCount)
 {
 	return TA_Test3Static(nTestCount);
+}
+
+
+TRADITIONALAPI_API char* TestStructInStructAPI(MYPERSON2* pPerson2)
+{
+	return TestStructInStruct(pPerson2);
+}
+
+
+TRADITIONALAPI_API  void DeleteStringAPI(char* personName)
+{
+	return DeleteString(personName);
 }

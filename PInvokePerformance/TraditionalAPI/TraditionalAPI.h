@@ -4,6 +4,8 @@
 // that uses this DLL. This way any other project whose source files include this file see 
 // TRADITIONALAPI_API functions as being imported from a DLL, whereas this DLL sees symbols
 // defined with this macro as being exported.
+#pragma once
+
 #ifdef TRADITIONALAPI_EXPORTS
 #define TRADITIONALAPI_API extern "C"   __declspec(dllexport) 
 #else
@@ -11,6 +13,8 @@
 #endif
 
 #include <Windows.h>
+
+#include "..\TraditionalAPIStatic\TraditionalAPIStatic.h"
 
 //	The simplest function, increment a counter.
 
@@ -27,3 +31,5 @@ TRADITIONALAPI_API double __stdcall TA_DotProduct(double arThreeTuple1[], double
 TRADITIONALAPI_API unsigned int __stdcall TA_Test1(double nTestCount);
 TRADITIONALAPI_API double __stdcall TA_Test2(double nTestCount);
 TRADITIONALAPI_API double __stdcall TA_Test3(double nTestCount);
+TRADITIONALAPI_API char* TestStructInStructAPI(MYPERSON2* pPerson2);
+TRADITIONALAPI_API void DeleteStringAPI(char* personName);

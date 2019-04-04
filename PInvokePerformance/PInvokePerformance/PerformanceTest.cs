@@ -5,6 +5,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Security;
+using SharedData;
 
 namespace PInvokePerformance
 {
@@ -28,6 +29,15 @@ namespace PInvokePerformance
 
         [DllImport("TraditionalAPI.dll")]
         private static extern double TA_Test3(double count);
+
+
+        // Declares a managed prototype for unmanaged function.
+        [DllImport("TraditionalAPI.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr TestStructInStructAPI(IntPtr person2);
+
+        [DllImport("TraditionalAPI.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void DeleteStringAPI(IntPtr personName);
+
 
         public void RunTests()
         {
@@ -53,8 +63,8 @@ namespace PInvokePerformance
             ManagedInterface.ManagedInterface managedInterface = new ManagedInterface.ManagedInterface();
 
             
-            double[] threeTuple1 = new double[] { 0, 0, 0 };
-            double[] threeTuple2 = new double[] { 0, 0, 0 };
+            double[] matrix1 = new double[] { 0, 0, 0 };
+            double[] matrix2 = new double[] { 0, 0, 0 };
 
             //  Run the tests through the interface.
             stopwatch.Restart();
@@ -63,28 +73,46 @@ namespace PInvokePerformance
             stopwatch.Stop();
             ManagedInterface_Test1_Time = stopwatch.Elapsed.TotalMilliseconds;
 
-            dResult = 0;
+            String res = String.Empty;
             stopwatch.Restart();
             for (ulong i = 1; i <= testCount; i++)
             {
-                dResult += managedInterface.CalculateSquareRoot((double)i);
+                // Structure with a pointer to another structure.
+                MyPerson personName;
+                personName.first = "Mark";
+                personName.last = "Lee";
+
+                MyPerson2 personAll;
+                personAll.age = 30;
+                personAll.person = personName;
+
+                res = managedInterface.TestStructInStruct(personAll);
             }
             stopwatch.Stop();
-            ManagedInterface_Test2_Time = stopwatch.Elapsed.TotalMilliseconds;
+            ManagedInterface_Test2_Time = Math.Round(stopwatch.Elapsed.TotalMilliseconds, 4);
+
+            //dResult = 0;
+            //stopwatch.Restart();
+            //for (ulong i = 1; i <= testCount; i++)
+            //{
+            //    dResult += managedInterface.CalculateSquareRoot((double)i);
+            //}
+            //stopwatch.Stop();
+            //ManagedInterface_Test2_Time = stopwatch.Elapsed.TotalMilliseconds;
 
             dResult = 0;
             stopwatch.Restart();
             for (ulong i = 1; i <= testCount; i++)
             {
-                threeTuple1[0] = i;
-                threeTuple1[1] = i;
-                threeTuple1[2] = i;
+                matrix1[0] = i;
+                matrix1[1] = i;
+                matrix1[2] = i;
 
-                threeTuple2[0] = i;
-                threeTuple2[1] = i;
-                threeTuple2[2] = i;
+                matrix2[0] = i;
+                matrix2[1] = i;
+                matrix2[2] = i;
 
-                dResult += managedInterface.DotProduct(threeTuple1, threeTuple2);
+                dResult += managedInterface.DotProduct(matrix1, matrix2);
             }
             stopwatch.Stop();
             ManagedInterface_Test3_Time = stopwatch.Elapsed.TotalMilliseconds;
@@ -96,31 +124,56 @@ namespace PInvokePerformance
             stopwatch.Stop();
             PInvoke_Test1_Time = stopwatch.Elapsed.TotalMilliseconds;
 
-            dResult = 0;
             stopwatch.Restart();
             for (ulong i = 1; i <= testCount; i++)
             {
-                dResult += TA_CalculateSquareRoot((double)i);
+                // Structure with a pointer to another structure.
+                MyPerson personName;
+                personName.first = "Mark";
+                personName.last = "Lee";
+
+                MyPerson2 personAll;
+                personAll.age = 30;
+
+                personAll.person = personName;
+
+                IntPtr buffer1 = Marshal.AllocCoTaskMem(Marshal.SizeOf(personAll));
+                Marshal.StructureToPtr(personAll, buffer1, false);
+
+                var resultPtr = TestStructInStructAPI(buffer1);
+                DeleteStringAPI(resultPtr);
+                Marshal.FreeCoTaskMem(buffer1);
             }
             stopwatch.Stop();
-            PInvoke_Test2_Time = stopwatch.Elapsed.TotalMilliseconds;
+            PInvoke_Test2_Time = Math.Round(stopwatch.Elapsed.TotalMilliseconds, 4);
+
+
+            //dResult = 0;
+            //stopwatch.Restart();
+            //for (ulong i = 1; i <= testCount; i++)
+            //{
+            //    dResult += TA_CalculateSquareRoot((double)i);
+            //}
+            //stopwatch.Stop();
+            //PInvoke_Test2_Time = stopwatch.Elapsed.TotalMilliseconds;
 
             dResult = 0;
             stopwatch.Restart();
             for (ulong i = 1; i <= testCount; i++)
             {
-                threeTuple1[0] = i;
-                threeTuple1[1] = i;
-                threeTuple1[2] = i;
+                matrix1[0] = i;
+                matrix1[1] = i;
+                matrix1[2] = i;
 
-                threeTuple2[0] = i;
-                threeTuple2[1] = i;
-                threeTuple2[2] = i;
+                matrix2[0] = i;
+                matrix2[1] = i;
+                matrix2[2] = i;
 
-                dResult += TA_DotProduct(threeTuple1, threeTuple2);
+                dResult += TA_DotProduct(matrix1, matrix2);
             }
             stopwatch.Stop();
             PInvoke_Test3_Time = stopwatch.Elapsed.TotalMilliseconds;
+
         }
 
         private ulong testCount = 1000000;

@@ -19,6 +19,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SharedData\SharedData.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Apex">
       <HintPath>Dependencies\Apex.dll</HintPath>
     </Reference>

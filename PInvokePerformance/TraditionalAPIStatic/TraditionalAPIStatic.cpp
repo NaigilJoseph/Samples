@@ -3,7 +3,9 @@
 
 #include "pch.h"
 #include "framework.h"
+#include "TraditionalAPIStatic.h"
 #include <math.h>
+#include <string.h>
 
 
 //	A global counter.
@@ -67,4 +69,29 @@ double TA_Test3Static(double nTestCount)
 		g_dResult += TA_DotProductStatic(arThreeTuple1, arThreeTuple2);
 	}
 	return g_dResult;
+}
+
+char* TestStructInStruct(MYPERSON2* pPerson2)
+{
+
+	if (pPerson2 == nullptr || pPerson2->person.first == nullptr)
+	{
+		return nullptr;
+	}
+
+	size_t firstLen = strlen(pPerson2->person.first);
+	size_t secondLen = strlen(pPerson2->person.last);
+
+	char* fullName = new char[firstLen + secondLen + 10];
+
+	memset(fullName, 0, firstLen + secondLen + 10);
+
+	strcpy_s(fullName, firstLen + 1, pPerson2->person.first);
+	strcpy_s(fullName + firstLen, secondLen + 1, pPerson2->person.last);
+	return fullName;
+}
+
+void DeleteString(char* personName)
+{
+	delete personName;
 }

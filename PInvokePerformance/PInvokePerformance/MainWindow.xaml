@@ -36,7 +36,7 @@
             <TextBlock Grid.Row="0" Grid.Column="2" Style="{StaticResource Heading}" Text="Test 2 / ms" />
             <TextBlock Grid.Row="0" Grid.Column="3" Style="{StaticResource Heading}" Text="Test 3 / ms" />
             <!--<TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource Heading}" Text="Unmanaged" />-->
-            <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource Heading}" Text="Managed C++/CLI Interface" />
+            <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource Heading}" Text="C++/CLI" />
             <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource Heading}" Text="PInvoke" />
             
             <!-- Results. -->

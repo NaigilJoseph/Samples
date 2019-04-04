@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharedData;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -8,6 +9,7 @@ namespace pInvokePerformanceCore
 {
     public class PerformanceTestCore
     {
+
         [DllImport("TraditionalAPI.dll")]
         private static extern void TA_IncrementCounter();
 
@@ -26,28 +28,20 @@ namespace pInvokePerformanceCore
         [DllImport("TraditionalAPI.dll")]
         private static extern double TA_Test3(double count);
 
+        // Declares a managed prototype for unmanaged function.
+        [DllImport("TraditionalAPI.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr TestStructInStructAPI(IntPtr person2);
+
+        [DllImport("TraditionalAPI.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void DeleteStringAPI(IntPtr personName);
+
+        
         public void RunTests()
         {
             double dResult = 0;
-            uint uResult = 0;
-            //  Run the unmanged tests.
-            stopwatch.Restart();
-            uResult = TA_Test1(testCount);
-            stopwatch.Stop();
-            Unmanaged_Test1_Time = Math.Round(stopwatch.Elapsed.TotalMilliseconds, 4);
-
-            stopwatch.Restart();
-            dResult = TA_Test2(testCount);
-            stopwatch.Stop();
-            Unmanaged_Test2_Time = Math.Round(stopwatch.Elapsed.TotalMilliseconds, 4);
-
-            stopwatch.Restart();
-            dResult = TA_Test3(testCount);
-            stopwatch.Stop();
-            Unmanaged_Test3_Time = Math.Round(stopwatch.Elapsed.TotalMilliseconds, 4);
-
-            double[] threeTuple1 = new double[] { 0, 0, 0 };
-            double[] threeTuple2 = new double[] { 0, 0, 0 };
+         
+            double[] matrix1 = new double[3 * 1024 *1024];
+            double[] matrix2 = new double[3 * 1024 * 1024];
 
             //  Run the tests through the pinvoke.
             stopwatch.Restart();
@@ -56,28 +50,51 @@ namespace pInvokePerformanceCore
             stopwatch.Stop();
             PInvoke_Test1_Time = Math.Round(stopwatch.Elapsed.TotalMilliseconds, 4);
 
-            dResult = 0;
             stopwatch.Restart();
             for (ulong i = 1; i <= testCount; i++)
             {
-                dResult += TA_CalculateSquareRoot((double)i);
+                // Structure with a pointer to another structure.
+                MyPerson personName;
+                personName.first = "Mark";
+                personName.last = "Lee";
+
+                MyPerson2 personAll;
+                personAll.age = 30;
+
+                personAll.person = personName;
+
+                IntPtr buffer1 = Marshal.AllocCoTaskMem(Marshal.SizeOf(personAll));
+                Marshal.StructureToPtr(personAll, buffer1, false);
+
+                var res = PerformanceTestCore.TestStructInStructAPI(buffer1);
+                DeleteStringAPI(res);
+                Marshal.FreeCoTaskMem(buffer1);
             }
             stopwatch.Stop();
             PInvoke_Test2_Time = Math.Round(stopwatch.Elapsed.TotalMilliseconds, 4);
 
+            //dResult = 0;
+            //stopwatch.Restart();
+            //for (ulong i = 1; i <= testCount; i++)
+            //{
+            //    dResult += TA_CalculateSquareRoot((double)i);
+            //}
+            //stopwatch.Stop();
+            //PInvoke_Test2_Time = Math.Round(stopwatch.Elapsed.TotalMilliseconds, 4);
+
             dResult = 0;
             stopwatch.Restart();
             for (ulong i = 1; i <= testCount; i++)
             {
-                threeTuple1[0] = i;
-                threeTuple1[1] = i;
-                threeTuple1[2] = i;
+                matrix1[0] = i;
+                matrix1[1] = i;
+                matrix1[2] = i;
 
-                threeTuple2[0] = i;
-                threeTuple2[1] = i;
-                threeTuple2[2] = i;
+                matrix2[0] = i;
+                matrix2[1] = i;
+                matrix2[2] = i;
 
-                dResult += TA_DotProduct(threeTuple1, threeTuple2);
+                dResult = TA_DotProduct(matrix1, matrix2);
             }
             stopwatch.Stop();
             PInvoke_Test3_Time = Math.Round(stopwatch.Elapsed.TotalMilliseconds, 4);

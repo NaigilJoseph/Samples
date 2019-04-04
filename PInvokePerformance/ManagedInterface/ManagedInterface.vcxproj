@@ -20,9 +20,10 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{67143223-9C7F-42F9-B988-48A52FB70E5C}</ProjectGuid>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <Keyword>ManagedCProj</Keyword>
     <RootNamespace>ManagedInterface</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -158,6 +159,9 @@
     <ResourceCompile Include="app.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SharedData\SharedData.csproj">
+      <Project>{35fbab6d-b8c3-4fba-ad6b-d61424ad1a1c}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\TraditionalAPI\TraditionalAPI.vcxproj">
       <Project>{b5b634e4-2825-468b-872b-e1c2db9e7b33}</Project>
     </ProjectReference>
