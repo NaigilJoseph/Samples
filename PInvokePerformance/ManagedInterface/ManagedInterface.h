@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "..\TraditionalAPI\TraditionalAPI.h"
+#include "..\TraditionalAPIStatic\TraditionalAPIStatic.h"
 
 using namespace System;
 using namespace System::Runtime::InteropServices;
@@ -17,13 +17,13 @@ namespace ManagedInterface {
 		void IncrementCounter()
 		{
 			//	Call the unmanaged function.
-			::TA_IncrementCounter();
+			::TA_IncrementCounterStatic();
 		}
 
 		double CalculateSquareRoot(double value)
 		{
 			//	Call the unmanaged function.
-			return ::TA_CalculateSquareRoot(value);
+			return ::TA_CalculateSquareRootStatic(value);
 		}
 
 		double DotProduct(array<double>^ threeTuple1, array<double>^ threeTuple2)
@@ -33,7 +33,7 @@ namespace ManagedInterface {
 			pin_ptr<double> p2(&threeTuple2[0]);
 			
 			//	Call the unmanaged function.
-			return TA_DotProduct(p1, p2);
+			return TA_DotProductStatic(p1, p2);
 		}
 
 		System::String^ TestStructInStruct(MyPerson2^ pPerson2)
@@ -44,10 +44,10 @@ namespace ManagedInterface {
 			// Serialize the managed object to "static" memory (not managed by the GC)
 			Marshal::StructureToPtr(pPerson2, ptr, false);
 
-			//	Call the unmanaged function.
-			char* pString =  TestStructInStructAPI(reinterpret_cast<MYPERSON2*>(ptr.ToPointer()));
+		    // Call the unmanaged function.
+			char* pString = TestStructInStructStatic(reinterpret_cast<MYPERSON2*>(ptr.ToPointer()));
 			String^ stringValue = gcnew String(pString);
-			DeleteStringAPI(pString);
+			DeleteObjectStatic(pString);
 
 			Marshal::FreeCoTaskMem(ptr);
 			return stringValue;

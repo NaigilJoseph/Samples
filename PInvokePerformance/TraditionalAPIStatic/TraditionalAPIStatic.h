@@ -1,6 +1,7 @@
 #pragma once
 
 
+
 typedef struct _MYPERSON
 {
 	char* first;
@@ -25,11 +26,5 @@ double TA_CalculateSquareRootStatic(double dValue);
 //	of two three tuples.
 double TA_DotProductStatic(double arThreeTuple1[], double arThreeTuple2[]);
 
-//	Run each test x times.
-unsigned int TA_Test1Static(double nTestCount);
-double TA_Test2Static(double nTestCount);
-double TA_Test3Static(double nTestCount);
-char* TestStructInStruct(MYPERSON2* pPerson2);
-void DeleteString(char* personName);
-//void TestStructInStruct3(MYPERSON3 person3);
-//void TestArrayInStruct(MYARRAYSTRUCT* pStruct);
+char* TestStructInStructStatic(MYPERSON2* pPerson2);
+void DeleteObjectStatic(void* pData);

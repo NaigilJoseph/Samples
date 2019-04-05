@@ -23,9 +23,6 @@ namespace PInvokePerformance
         {
             //  Set the view model properties.
             PerformanceTest test = e.Result as PerformanceTest;
-            Unmanaged_Test1_Result = test.Unmanaged_Test1_Time;
-            Unmanaged_Test2_Result = test.Unmanaged_Test2_Time;
-            Unmanaged_Test3_Result = test.Unmanaged_Test3_Time;
             ManagedInteface_Test1_Result = test.ManagedInterface_Test1_Time;
             ManagedInteface_Test2_Result = test.ManagedInterface_Test2_Time;
             ManagedInteface_Test3_Result = test.ManagedInterface_Test3_Time;

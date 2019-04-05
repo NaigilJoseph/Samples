@@ -26,32 +26,13 @@ TRADITIONALAPI_API double __cdecl TA_DotProduct(double arThreeTuple1[], double a
 	return TA_DotProductStatic(arThreeTuple1, arThreeTuple2);
 }
 
-//	Run a test x times.
-TRADITIONALAPI_API unsigned int __cdecl TA_Test1(double nTestCount)
+TRADITIONALAPI_API char* TestStructInStruct(MYPERSON2* pPerson2)
 {
-	return TA_Test1Static(nTestCount);
-}
-
-//	Run a test x times.
-TRADITIONALAPI_API double __cdecl TA_Test2(double nTestCount)
-{
-	return TA_Test2Static(nTestCount);
-}
-
-//	Run a test x times.
-TRADITIONALAPI_API double __cdecl TA_Test3(double nTestCount)
-{
-	return TA_Test3Static(nTestCount);
+	return TestStructInStructStatic(pPerson2);
 }
 
 
-TRADITIONALAPI_API char* TestStructInStructAPI(MYPERSON2* pPerson2)
+TRADITIONALAPI_API  void DeleteObjectAPI(void* pData)
 {
-	return TestStructInStruct(pPerson2);
-}
-
-
-TRADITIONALAPI_API  void DeleteStringAPI(char* personName)
-{
-	return DeleteString(personName);
+	return DeleteObjectStatic(pData);
 }

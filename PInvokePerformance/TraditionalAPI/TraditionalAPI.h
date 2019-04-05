@@ -27,9 +27,5 @@ TRADITIONALAPI_API double __stdcall TA_CalculateSquareRoot(double dValue);
 //	of two three tuples.
 TRADITIONALAPI_API double __stdcall TA_DotProduct(double arThreeTuple1[], double arThreeTuple2[]);
 
-//	Run each test x times.
-TRADITIONALAPI_API unsigned int __stdcall TA_Test1(double nTestCount);
-TRADITIONALAPI_API double __stdcall TA_Test2(double nTestCount);
-TRADITIONALAPI_API double __stdcall TA_Test3(double nTestCount);
-TRADITIONALAPI_API char* TestStructInStructAPI(MYPERSON2* pPerson2);
-TRADITIONALAPI_API void DeleteStringAPI(char* personName);
+TRADITIONALAPI_API char* TestStructInStruct(MYPERSON2* pPerson2);
+TRADITIONALAPI_API void DeleteObjectAPI(void* pData);

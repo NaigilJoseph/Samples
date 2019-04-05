@@ -30,48 +30,7 @@ double TA_DotProductStatic(double arThreeTuple1[], double arThreeTuple2[])
 	return arThreeTuple1[0] * arThreeTuple2[0] + arThreeTuple1[1] * arThreeTuple2[1] + arThreeTuple1[2] * arThreeTuple2[2];
 }
 
-//	Run a test x times.
-unsigned int TA_Test1Static(double nTestCount)
-{
-	for (double i = 1; i <= nTestCount; i++)
-		TA_IncrementCounterStatic();
-
-	return g_uCounter;
-}
-
-//	Run a test x times.
-double TA_Test2Static(double nTestCount)
-{
-	g_dResult = 0;
-	for (double i = 1; i <= nTestCount; i++)
-		g_dResult += TA_CalculateSquareRootStatic(i);
-
-	return g_dResult;
-
-}
-
-//	Run a test x times.
-double TA_Test3Static(double nTestCount)
-{
-	double arThreeTuple1[3];
-	double arThreeTuple2[3];
-	g_dResult = 0;
-	for (double i = 1; i <= nTestCount; i++)
-	{
-		arThreeTuple1[0] = i;
-		arThreeTuple1[1] = i;
-		arThreeTuple1[2] = i;
-
-		arThreeTuple2[0] = i;
-		arThreeTuple2[1] = i;
-		arThreeTuple2[2] = i;
-
-		g_dResult += TA_DotProductStatic(arThreeTuple1, arThreeTuple2);
-	}
-	return g_dResult;
-}
-
-char* TestStructInStruct(MYPERSON2* pPerson2)
+char* TestStructInStructStatic(MYPERSON2* pPerson2)
 {
 
 	if (pPerson2 == nullptr || pPerson2->person.first == nullptr)
@@ -91,7 +50,7 @@ char* TestStructInStruct(MYPERSON2* pPerson2)
 	return fullName;
 }
 
-void DeleteString(char* personName)
+void DeleteObjectStatic(void* pData)
 {
-	delete personName;
+	delete pData;
 }

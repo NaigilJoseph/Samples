@@ -118,6 +118,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>
       </AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -130,6 +132,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>
       </AdditionalDependencies>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -162,8 +166,8 @@
     <ProjectReference Include="..\SharedData\SharedData.csproj">
       <Project>{35fbab6d-b8c3-4fba-ad6b-d61424ad1a1c}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\TraditionalAPI\TraditionalAPI.vcxproj">
-      <Project>{b5b634e4-2825-468b-872b-e1c2db9e7b33}</Project>
+    <ProjectReference Include="..\TraditionalAPIStatic\TraditionalAPIStatic.vcxproj">
+      <Project>{f4bee530-e017-4e2d-b227-ae85cd984f03}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

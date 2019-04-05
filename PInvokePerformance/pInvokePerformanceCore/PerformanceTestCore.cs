@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Security;
 using System.Text;
 
 namespace pInvokePerformanceCore
@@ -19,21 +20,12 @@ namespace pInvokePerformanceCore
         [DllImport("TraditionalAPI.dll")]
         private static extern double TA_DotProduct(double[] threeTuple1, double[] threeTuple2);
 
-        [DllImport("TraditionalAPI.dll")]
-        private static extern uint TA_Test1(double count);
-
-        [DllImport("TraditionalAPI.dll")]
-        private static extern double TA_Test2(double count);
-
-        [DllImport("TraditionalAPI.dll")]
-        private static extern double TA_Test3(double count);
-
         // Declares a managed prototype for unmanaged function.
         [DllImport("TraditionalAPI.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr TestStructInStructAPI(IntPtr person2);
+        public static extern IntPtr TestStructInStruct(IntPtr person2);
 
         [DllImport("TraditionalAPI.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void DeleteStringAPI(IntPtr personName);
+        public static extern void DeleteObjectAPI(IntPtr personName);
 
         
         public void RunTests()
@@ -50,37 +42,22 @@ namespace pInvokePerformanceCore
             stopwatch.Stop();
             PInvoke_Test1_Time = Math.Round(stopwatch.Elapsed.TotalMilliseconds, 4);
 
+            // Structure with a pointer to another structure.
+            MyPerson personName = new MyPerson() { first = "Mark", last = "Lee" };
+            MyPerson2 personAll = new MyPerson2() { age = 35, person = personName };
+
             stopwatch.Restart();
             for (ulong i = 1; i <= testCount; i++)
             {
-                // Structure with a pointer to another structure.
-                MyPerson personName;
-                personName.first = "Mark";
-                personName.last = "Lee";
-
-                MyPerson2 personAll;
-                personAll.age = 30;
-
-                personAll.person = personName;
-
                 IntPtr buffer1 = Marshal.AllocCoTaskMem(Marshal.SizeOf(personAll));
                 Marshal.StructureToPtr(personAll, buffer1, false);
 
-                var res = PerformanceTestCore.TestStructInStructAPI(buffer1);
-                DeleteStringAPI(res);
+                var res = PerformanceTestCore.TestStructInStruct(buffer1);
+                DeleteObjectAPI(res);
                 Marshal.FreeCoTaskMem(buffer1);
             }
             stopwatch.Stop();
             PInvoke_Test2_Time = Math.Round(stopwatch.Elapsed.TotalMilliseconds, 4);
-
-            //dResult = 0;
-            //stopwatch.Restart();
-            //for (ulong i = 1; i <= testCount; i++)
-            //{
-            //    dResult += TA_CalculateSquareRoot((double)i);
-            //}
-            //stopwatch.Stop();
-            //PInvoke_Test2_Time = Math.Round(stopwatch.Elapsed.TotalMilliseconds, 4);
 
             dResult = 0;
             stopwatch.Restart();
@@ -94,7 +71,7 @@ namespace pInvokePerformanceCore
                 matrix2[1] = i;
                 matrix2[2] = i;
 
-                dResult = TA_DotProduct(matrix1, matrix2);
+                dResult += TA_DotProduct(matrix1, matrix2);
             }
             stopwatch.Stop();
             PInvoke_Test3_Time = Math.Round(stopwatch.Elapsed.TotalMilliseconds, 4);
