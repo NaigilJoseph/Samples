@@ -4,7 +4,6 @@
 #include "pch.h"
 #include "framework.h"
 #include "TraditionalAPIStatic.h"
-#include <math.h>
 #include <string.h>
 
 
@@ -15,12 +14,6 @@ double g_dResult = 0;
 void TA_IncrementCounterStatic()
 {
 	g_uCounter++;
-}
-
-//	A slightly more complex function, find the square root of a double.
-double TA_CalculateSquareRootStatic(double dValue)
-{
-	return ::sqrt(dValue);
 }
 
 //	A function that would require array marshalling, find the dot product

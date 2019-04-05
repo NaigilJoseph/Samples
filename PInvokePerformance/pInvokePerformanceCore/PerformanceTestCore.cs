@@ -15,9 +15,6 @@ namespace pInvokePerformanceCore
         private static extern void TA_IncrementCounter();
 
         [DllImport("TraditionalAPI.dll")]
-        private static extern double TA_CalculateSquareRoot(double value);
-
-        [DllImport("TraditionalAPI.dll")]
         private static extern double TA_DotProduct(double[] threeTuple1, double[] threeTuple2);
 
         // Declares a managed prototype for unmanaged function.

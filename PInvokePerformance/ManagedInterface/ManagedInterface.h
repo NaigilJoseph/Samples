@@ -20,12 +20,6 @@ namespace ManagedInterface {
 			::TA_IncrementCounterStatic();
 		}
 
-		double CalculateSquareRoot(double value)
-		{
-			//	Call the unmanaged function.
-			return ::TA_CalculateSquareRootStatic(value);
-		}
-
 		double DotProduct(array<double>^ threeTuple1, array<double>^ threeTuple2)
 		{
 			//	Pin the arrays.

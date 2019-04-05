@@ -13,11 +13,6 @@ TRADITIONALAPI_API void __cdecl TA_IncrementCounter()
 	TA_IncrementCounterStatic();
 }
 
-//	A slightly more complex function, find the square root of a double.
-TRADITIONALAPI_API double __cdecl TA_CalculateSquareRoot(double dValue)
-{
-	return TA_CalculateSquareRootStatic(dValue);
-}
 
 //	A function that would require array marshalling, find the dot product
 //	of two three tuples.

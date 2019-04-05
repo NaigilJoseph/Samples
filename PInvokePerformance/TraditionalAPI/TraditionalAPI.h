@@ -20,9 +20,6 @@
 
 TRADITIONALAPI_API void __stdcall TA_IncrementCounter();
 
-//	A slightly more complex function, find the square root of a double.
-TRADITIONALAPI_API double __stdcall TA_CalculateSquareRoot(double dValue);
-
 //	A function that would require array marshalling, find the dot product
 //	of two three tuples.
 TRADITIONALAPI_API double __stdcall TA_DotProduct(double arThreeTuple1[], double arThreeTuple2[]);

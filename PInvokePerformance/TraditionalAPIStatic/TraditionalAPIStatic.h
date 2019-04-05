@@ -19,9 +19,6 @@ typedef struct _MYPERSON2
 
 void TA_IncrementCounterStatic();
 
-//	A slightly more complex function, find the square root of a double.
-double TA_CalculateSquareRootStatic(double dValue);
-
 //	A function that would require array marshalling, find the dot product
 //	of two three tuples.
 double TA_DotProductStatic(double arThreeTuple1[], double arThreeTuple2[]);
